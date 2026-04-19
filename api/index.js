@@ -22,8 +22,8 @@ app.get('/api/search', async (req, res) => {
         let movies = [];
 
         $('.A10').each((i, el) => {
-            let title = $(el).find('td[width="100%"] a div').text().trim();
-            if (!title) title = $(el).text().trim().split('\n')[0];
+            let title = $(el).find('div[style*="font-size: 15px"]').text().trim();
+            if (!title) title = $(el).find('a').first().text().trim();
             
             let pageLink = $(el).find('a').attr('href');
             let poster = $(el).find('img').attr('src');
