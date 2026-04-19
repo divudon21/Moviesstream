@@ -22,11 +22,11 @@ app.get('/api/search', async (req, res) => {
         let movies = [];
 
         $('.A10').each((i, el) => {
-            let title = $(el).find('div[style*="font-size: 15px"]').text().trim();
-            if (!title) title = $(el).find('a').first().text().trim();
+            let title = $(el).find('div').first().text().trim();
+            if (!title) title = $(el).text().replace(/\n/g, '').trim();
             
-            let pageLink = $(el).find('a').attr('href');
-            let poster = $(el).find('img').attr('src');
+            let pageLink = $(el).find('a').first().attr('href');
+            let poster = $(el).find('img').first().attr('src');
 
             if (title && pageLink && !pageLink.includes('whatsapp') && !pageLink.includes('telegram')) {
                 if(!pageLink.startsWith('http')) {
@@ -35,6 +35,11 @@ app.get('/api/search', async (req, res) => {
                 movies.push({ title, pageLink, poster });
             }
         });
+
+        // Debug: Return raw HTML if empty
+        if (movies.length === 0) {
+           return res.json({ success: true, movies: [], html_length: data.length, sample: data.substring(0, 500) });
+        }
 
         res.json({ success: true, movies });
 
