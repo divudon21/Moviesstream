@@ -21,10 +21,9 @@ app.get('/api/search', async (req, res) => {
         
         console.log(`Searching for: ${query}`);
 
-        // Launch Puppeteer (Render environment variables used if available)
         browser = await puppeteer.launch({
             headless: 'new',
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(),
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
             args: [
                 '--no-sandbox', 
                 '--disable-setuid-sandbox',
@@ -41,8 +40,6 @@ app.get('/api/search', async (req, res) => {
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36');
 
         await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-        
-        // Wait to bypass basic Cloudflare checks
         await page.waitForTimeout(5000); 
 
         const html = await page.content();
@@ -60,7 +57,7 @@ app.get('/api/search', async (req, res) => {
         });
 
         if (movies.length === 0) {
-             return res.json({ success: false, error: "No results found or blocked by Cloudflare Captcha." });
+             return res.json({ success: false, error: "No results found or blocked by Cloudflare." });
         }
 
         res.json({ success: true, movies });
@@ -74,9 +71,9 @@ app.get('/api/search', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send("Movie Scraper API with Puppeteer is running on Render!");
+    res.send("Movie Scraper API is running on Render with Docker!");
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
 });
