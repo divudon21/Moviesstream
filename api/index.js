@@ -21,25 +21,22 @@ app.get('/api/search', async (req, res) => {
         const $ = cheerio.load(data);
         let movies = [];
 
-        $('.A10').each((i, el) => {
-            let title = $(el).find('div').first().text().trim();
+        // In FilmyFly search results, the items are usually inside div.A10 or table rows
+        $('.A10, .cat').each((i, el) => {
+            let title = $(el).find('div[style*="color"]').first().text().trim();
+            if (!title) title = $(el).find('b').text().trim();
             if (!title) title = $(el).text().replace(/\n/g, '').trim();
             
             let pageLink = $(el).find('a').first().attr('href');
             let poster = $(el).find('img').first().attr('src');
 
-            if (title && pageLink && !pageLink.includes('whatsapp') && !pageLink.includes('telegram')) {
+            if (title && pageLink && pageLink.includes('.html') && !pageLink.includes('whatsapp') && !pageLink.includes('telegram')) {
                 if(!pageLink.startsWith('http')) {
                     pageLink = `https://1filmyfly.fyi${pageLink}`;
                 }
                 movies.push({ title, pageLink, poster });
             }
         });
-
-        // Debug: Return raw HTML if empty
-        if (movies.length === 0) {
-           return res.json({ success: true, movies: [], html_length: data.length, sample: data.substring(0, 500) });
-        }
 
         res.json({ success: true, movies });
 
