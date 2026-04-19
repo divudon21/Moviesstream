@@ -21,22 +21,36 @@ app.get('/api/search', async (req, res) => {
         const $ = cheerio.load(data);
         let movies = [];
 
-        // In FilmyFly search results, the items are usually inside div.A10 or table rows
-        $('.A10, .cat').each((i, el) => {
-            let title = $(el).find('div[style*="color"]').first().text().trim();
-            if (!title) title = $(el).find('b').text().trim();
-            if (!title) title = $(el).text().replace(/\n/g, '').trim();
+        $('.A2').each((i, el) => {
+            let title = $(el).find('b span b').text().trim();
+            if (!title) title = $(el).find('a').last().text().trim();
             
             let pageLink = $(el).find('a').first().attr('href');
             let poster = $(el).find('img').first().attr('src');
 
-            if (title && pageLink && pageLink.includes('.html') && !pageLink.includes('whatsapp') && !pageLink.includes('telegram')) {
+            if (title && pageLink && !pageLink.includes('whatsapp') && !pageLink.includes('telegram')) {
                 if(!pageLink.startsWith('http')) {
                     pageLink = `https://1filmyfly.fyi${pageLink}`;
                 }
                 movies.push({ title, pageLink, poster });
             }
         });
+
+        // Fallback for homepage structure
+        if (movies.length === 0) {
+            $('.A10').each((i, el) => {
+                let title = $(el).find('div[style*="font-size: 15px"]').text().trim();
+                let pageLink = $(el).find('a').first().attr('href');
+                let poster = $(el).find('img').first().attr('src');
+
+                if (title && pageLink && !pageLink.includes('whatsapp')) {
+                    if(!pageLink.startsWith('http')) {
+                        pageLink = `https://1filmyfly.fyi${pageLink}`;
+                    }
+                    movies.push({ title, pageLink, poster });
+                }
+            });
+        }
 
         res.json({ success: true, movies });
 
