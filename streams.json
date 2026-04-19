@@ -1,0 +1,35 @@
+{
+  "tt0816692": {
+    "imdbId": "tt0816692",
+    "title": "Interstellar",
+    "streams": [
+      {
+        "label": "1080p",
+        "type": "hls",
+        "url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+      }
+    ]
+  },
+  "tt1375666": {
+    "imdbId": "tt1375666",
+    "title": "Inception",
+    "streams": [
+      {
+        "label": "720p",
+        "type": "mp4",
+        "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+      }
+    ]
+  },
+  "tt0111161": {
+    "imdbId": "tt0111161",
+    "title": "The Shawshank Redemption",
+    "streams": [
+      {
+        "label": "480p",
+        "type": "mp4",
+        "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+      }
+    ]
+  }
+}
