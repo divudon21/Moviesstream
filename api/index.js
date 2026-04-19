@@ -6,51 +6,36 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+// 1. Search API - moontv.to
 app.get('/api/search', async (req, res) => {
     const query = req.query.q;
     if (!query) return res.status(400).json({ error: "Movie name required" });
 
     try {
-        const searchUrl = `https://1filmyfly.fyi/site-1.html?to-search=${encodeURIComponent(query)}`;
+        const searchUrl = `https://moontv.to/filter?keyword=${encodeURIComponent(query)}`;
         const { data } = await axios.get(searchUrl, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Accept': 'text/html'
             }
         });
         
         const $ = cheerio.load(data);
         let movies = [];
 
-        $('.A2').each((i, el) => {
-            let title = $(el).find('b span b').text().trim();
-            if (!title) title = $(el).find('a').last().text().trim();
-            
-            let pageLink = $(el).find('a').first().attr('href');
-            let poster = $(el).find('img').first().attr('src');
+        $('.movies .item').each((i, el) => {
+            const title = $(el).find('.title').text().trim();
+            const pageLink = $(el).attr('href');
+            let poster = $(el).find('img.lazyload').attr('data-src') || $(el).find('img').attr('src');
 
-            if (title && pageLink && !pageLink.includes('whatsapp') && !pageLink.includes('telegram')) {
-                if(!pageLink.startsWith('http')) {
-                    pageLink = `https://1filmyfly.fyi${pageLink}`;
-                }
-                movies.push({ title, pageLink, poster });
-            }
-        });
-
-        // Fallback for homepage structure
-        if (movies.length === 0) {
-            $('.A10').each((i, el) => {
-                let title = $(el).find('div[style*="font-size: 15px"]').text().trim();
-                let pageLink = $(el).find('a').first().attr('href');
-                let poster = $(el).find('img').first().attr('src');
-
-                if (title && pageLink && !pageLink.includes('whatsapp')) {
-                    if(!pageLink.startsWith('http')) {
-                        pageLink = `https://1filmyfly.fyi${pageLink}`;
-                    }
+            if (title && pageLink) {
+                if(pageLink.startsWith('/')) {
+                    movies.push({ title, pageLink: `https://moontv.to${pageLink}`, poster });
+                } else {
                     movies.push({ title, pageLink, poster });
                 }
-            });
-        }
+            }
+        });
 
         res.json({ success: true, movies });
 
@@ -60,28 +45,30 @@ app.get('/api/search', async (req, res) => {
     }
 });
 
-app.get('/api/links', async (req, res) => {
+// 2. Get Video Link API (Extracts the embed iframe URL from moontv.to)
+app.get('/api/get-links', async (req, res) => {
     const pageUrl = req.query.url;
     if (!pageUrl) return res.status(400).json({ error: "Page URL required" });
 
     try {
         const { data } = await axios.get(pageUrl, {
-            headers: { 'User-Agent': 'Mozilla/5.0' }
+            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
         });
         const $ = cheerio.load(data);
         
-        let downloadLinks = [];
+        // Find iframe source (usually in a specific div or iframe tag on moontv)
+        let iframeUrl = $('iframe').attr('src') || '';
+        
+        if (!iframeUrl) {
+            // Fallback: look for data-src or specific player elements
+            iframeUrl = $('#player iframe').attr('src') || '';
+        }
 
-        $('a').each((i, el) => {
-            const linkText = $(el).text().trim();
-            const linkHref = $(el).attr('href');
-            
-            if (linkHref && linkHref.includes('/download/')) {
-                downloadLinks.push({ quality: linkText || "Download", url: `https://1filmyfly.fyi${linkHref}` });
-            }
-        });
+        if(iframeUrl && iframeUrl.startsWith('//')) {
+            iframeUrl = 'https:' + iframeUrl;
+        }
 
-        res.json({ success: true, links: downloadLinks });
+        res.json({ success: true, embedUrl: iframeUrl });
 
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -89,7 +76,7 @@ app.get('/api/links', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send("FilmyFly Scraper API is running on Vercel!");
+    res.send("MoonTV Scraper API is running on Vercel!");
 });
 
 module.exports = app;
