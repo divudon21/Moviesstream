@@ -15,9 +15,20 @@
     "title": "Inception",
     "streams": [
       {
-        "label": "720p",
+        "label": "1080p",
         "type": "mp4",
         "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+      }
+    ]
+  },
+  "tt0468569": {
+    "imdbId": "tt0468569",
+    "title": "The Dark Knight",
+    "streams": [
+      {
+        "label": "1080p",
+        "type": "mp4",
+        "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
       }
     ]
   },
@@ -26,9 +37,42 @@
     "title": "The Shawshank Redemption",
     "streams": [
       {
-        "label": "480p",
+        "label": "1080p",
         "type": "mp4",
         "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+      }
+    ]
+  },
+  "tt0137523": {
+    "imdbId": "tt0137523",
+    "title": "Fight Club",
+    "streams": [
+      {
+        "label": "1080p",
+        "type": "mp4",
+        "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
+      }
+    ]
+  },
+  "tt0109830": {
+    "imdbId": "tt0109830",
+    "title": "Forrest Gump",
+    "streams": [
+      {
+        "label": "1080p",
+        "type": "mp4",
+        "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+      }
+    ]
+  },
+  "tt0120737": {
+    "imdbId": "tt0120737",
+    "title": "The Lord of the Rings: The Fellowship of the Ring",
+    "streams": [
+      {
+        "label": "1080p",
+        "type": "mp4",
+        "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4"
       }
     ]
   }
