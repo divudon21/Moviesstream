@@ -22,7 +22,7 @@ app.get('/api/search', async (req, res) => {
         let movies = [];
 
         $('.A10').each((i, el) => {
-            const title = $(el).find('td[width="100%"] a div').text().trim() || $(el).text().trim();
+            let title = $(el).find('div').first().text().trim();
             let pageLink = $(el).find('a').attr('href');
             let poster = $(el).find('img').attr('src');
 
@@ -39,6 +39,34 @@ app.get('/api/search', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, error: "Scraping failed: " + error.message });
+    }
+});
+
+app.get('/api/links', async (req, res) => {
+    const pageUrl = req.query.url;
+    if (!pageUrl) return res.status(400).json({ error: "Page URL required" });
+
+    try {
+        const { data } = await axios.get(pageUrl, {
+            headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        const $ = cheerio.load(data);
+        
+        let downloadLinks = [];
+
+        $('a').each((i, el) => {
+            const linkText = $(el).text().trim();
+            const linkHref = $(el).attr('href');
+            
+            if (linkHref && linkHref.includes('/download/')) {
+                downloadLinks.push({ quality: linkText || "Download", url: `https://1filmyfly.fyi${linkHref}` });
+            }
+        });
+
+        res.json({ success: true, links: downloadLinks });
+
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
     }
 });
 
