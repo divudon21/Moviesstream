@@ -53,13 +53,13 @@ jobs:
 
       - name: Build Release APKs
         run: |
-          gradle clean assembleRelease --stacktrace --info 2>&1 | tee build.log
+          set -o pipefail
+          gradle clean assembleRelease --stacktrace | tee build.log
           echo "=== BUILD LOG TAIL ==="
           tail -n 200 build.log || true
           ls -lh app/build/outputs/apk/release/ || echo "no outputs yet"
           echo "=== FIND APKs ==="
           find app/build -name "*.apk" -type f -exec ls -lh {} \; || echo "no APKs found"
-          if [ -z "$(find app/build -name "*.apk" -type f 2>/dev/null)" ]; then echo "APK missing, checking for errors"; cat build.log | grep -i "error\|failed" | head -n 100 || true; cat build.log | tail -n 100; fi
 
       - name: List APK outputs
         run: |
