@@ -351,9 +351,12 @@ fun CategoryFilterRow(categories: List<String>, selected: String, onSelect: (Str
                     selectedLeadingIconColor = Color.White
                 ),
                 border = FilterChipDefaults.filterChipBorder(
+                    enabled = true,
+                    selected = isSelected,
                     borderColor = MaterialTheme.colorScheme.outlineVariant,
                     selectedBorderColor = MaterialTheme.colorScheme.primary,
-                    borderWidth = 1.dp
+                    borderWidth = 1.dp,
+                    selectedBorderWidth = 1.dp
                 )
             )
         }
