@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_liquid_glass"
+    android:orientation="vertical"
+    android:padding="14dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📱 Screen Time" android:textColor="#FFFFFFFF" android:textSize="11sp" android:textStyle="bold"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:background="@drawable/bg_liquid_glass_border" android:padding="4dp" android:text="Today" android:textColor="#80FFFFFF" android:textSize="8sp"/>
+    </LinearLayout>
+    <TextView android:id="@+id/tv_screentime_hours" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="5h 32m" android:textColor="#FFFFFFFF" android:textSize="22sp" android:textStyle="bold"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="↓ 12% from yesterday" android:textColor="#7CFF9D" android:textSize="10sp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:orientation="horizontal">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:background="@drawable/bg_liquid_glass_border" android:padding="4dp" android:text="Insta 2h" android:textColor="#FFFFFFFF" android:textSize="8sp"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="4dp" android:background="@drawable/bg_widget_cell" android:padding="4dp" android:text="YT 1.5h" android:textColor="#80FFFFFF" android:textSize="8sp"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="4dp" android:background="@drawable/bg_widget_cell" android:padding="4dp" android:text="WA 0.8h" android:textColor="#80FFFFFF" android:textSize="8sp"/>
+    </LinearLayout>
+</LinearLayout>

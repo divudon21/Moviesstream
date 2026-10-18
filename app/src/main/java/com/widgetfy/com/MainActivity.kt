@@ -36,6 +36,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.widgetfy.com.ui.theme.WidgetfyTheme
+import com.widgetfy.com.ui.theme.LiquidGlass
+import com.widgetfy.com.ui.theme.liquidGlass
+import com.widgetfy.com.ui.theme.liquidGlassCard
+import com.widgetfy.com.ui.theme.GlassEffectContainer
 import com.widgetfy.com.util.QuoteProvider
 import com.widgetfy.com.util.TimeUtils
 import com.widgetfy.com.widget.*
@@ -73,7 +77,7 @@ fun WidgetfyApp() {
     var showAddDialog by remember { mutableStateOf<WidgetInfo?>(null) }
     var showDetail by remember { mutableStateOf<WidgetInfo?>(null) }
 
-    // 20 Widgets — increased quantity as requested
+    // 26 Widgets — Liquid Glass Edition (20 + 6 new)
     val widgets = remember {
         listOf(
             WidgetInfo("digital", "Digital Clock", "Live time, date & timezone. Updates every minute.", "Clock", Icons.Filled.Schedule, listOf(Color(0xFF6750A4), Color(0xFF9C88FF)), DigitalClockWidget::class.java, TimeUtils.currentTime(), "4.8 • 12k uses", isPopular = true, size = BentoSize.Hero),
@@ -88,7 +92,6 @@ fun WidgetfyApp() {
             WidgetInfo("todo", "Tasks & Notes", "Quick tasks on home screen, sync ready.", "Productivity", Icons.Filled.TaskAlt, listOf(Color(0xFF0891B2), Color(0xFF06B6D4)), TodoWidget::class.java, "3 tasks • Tap edit", "4.6 • 6k uses", size = BentoSize.Wide),
             WidgetInfo("photo", "Photo Frame", "Your favorite pic, live on home.", "Lifestyle", Icons.Filled.PhotoLibrary, listOf(Color(0xFFEA580C), Color(0xFFFB923C)), PhotoFrameWidget::class.java, "Your photo • Frame", "4.7 • 4k uses", size = BentoSize.Normal),
             WidgetInfo("quote", "Daily Zen", "Quotes that inspire, rotate daily.", "Lifestyle", Icons.Filled.FormatQuote, listOf(Color(0xFF7C3AED), Color(0xFFA78BFA)), QuoteWidget::class.java, QuoteProvider.ofDay().first.take(22)+"…", "4.8 • 8k uses", size = BentoSize.Normal),
-            // NEW 8 PREMIUM WIDGETS (quantity increased)
             WidgetInfo("music", "Music Player", "Playback controls + album art widget.", "Lifestyle", Icons.Filled.PlayArrow, listOf(Color(0xFF1DB954), Color(0xFF1ED760)), MusicWidget::class.java, "♪ Now Playing", "4.9 • 14k uses", isNew = true, size = BentoSize.Wide),
             WidgetInfo("countdown", "Countdown", "Events, birthdays - days left tracker.", "Productivity", Icons.Filled.Timer, listOf(Color(0xFF0EA5E9), Color(0xFF38BDF8)), CountdownWidget::class.java, "Diwali: 5 days", "4.7 • 5k uses", isNew = true, size = BentoSize.Normal),
             WidgetInfo("finance", "Finance Pulse", "Budget, expenses & savings snapshot.", "Productivity", Icons.Filled.AccountBalance, listOf(Color(0xFF059669), Color(0xFF10B981)), FinanceWidget::class.java, "₹12,450 saved", "4.8 • 9k uses", size = BentoSize.Normal),
@@ -97,6 +100,13 @@ fun WidgetfyApp() {
             WidgetInfo("crypto", "Crypto Ticker", "BTC, ETH live price & change.", "Finance", Icons.Filled.Paid, listOf(Color(0xFFF59E0B), Color(0xFFFACC15)), CryptoWidget::class.java, "BTC ₹58L +2.4%", "4.7 • 6k uses", size = BentoSize.Normal),
             WidgetInfo("habit", "Habit Streak", "Daily habits & streak counter.", "Productivity", Icons.Filled.Star, listOf(Color(0xFFF97316), Color(0xFFFDBA74)), HabitWidget::class.java, "12 day streak", "4.8 • 10k uses", isPopular = true, size = BentoSize.Normal),
             WidgetInfo("reminder", "Quick Reminder", "Upcoming tasks & alerts.", "Productivity", Icons.Filled.Notifications, listOf(Color(0xFF8B5CF6), Color(0xFFDDD6FE)), ReminderWidget::class.java, "3 reminders • Today", "4.5 • 4k uses", size = BentoSize.Normal),
+            // NEW 6 Liquid Glass Widgets (v3.0)
+            WidgetInfo("timer", "Focus Timer", "Pomodoro 25:00 timer with start/reset.", "Productivity", Icons.Filled.HourglassBottom, listOf(Color(0xFFFF6B6B), Color(0xFFFFB86C)), TimerWidget::class.java, "25:00 • Focus", "4.9 • 18k uses", isNew = true, size = BentoSize.Normal),
+            WidgetInfo("savings", "Savings Goal", "Track savings towards your dream purchase.", "Finance", Icons.Filled.Savings, listOf(Color(0xFF6750A4), Color(0xFFB794F6)), SavingsWidget::class.java, "₹68k / ₹1L", "4.8 • 7k uses", isNew = true, size = BentoSize.Normal),
+            WidgetInfo("breathe", "Breathe", "Guided breathing: inhale, hold, exhale.", "Health", Icons.Filled.Spa, listOf(Color(0xFF00B894), Color(0xFF74B9FF)), BreatheWidget::class.java, "Inhale • 4s", "4.9 • 9k uses", isNew = true, size = BentoSize.Normal),
+            WidgetInfo("dial", "Quick Dial", "One-tap call to favorites.", "System", Icons.Filled.Call, listOf(Color(0xFF2980B9), Color(0xFF6DD5FA)), DialWidget::class.java, "Mom • Dad • Boss", "4.7 • 5k uses", isNew = true, size = BentoSize.Wide),
+            WidgetInfo("vpn", "VPN Control", "One-tap VPN connect & location.", "System", Icons.Filled.VpnKey, listOf(Color(0xFF0F2027), Color(0xFF2BC0E4)), VpnWidget::class.java, "● Connected SG", "4.8 • 6k uses", isNew = true, size = BentoSize.Normal),
+            WidgetInfo("screentime", "Screen Time", "Daily usage & top apps breakdown.", "System", Icons.Filled.PhoneAndroid, listOf(Color(0xFF232526), Color(0xFF414345)), ScreenTimeWidget::class.java, "5h 32m today", "4.6 • 4k uses", isNew = true, size = BentoSize.Wide),
         )
     }
 
@@ -107,98 +117,107 @@ fun WidgetfyApp() {
         else -> widgets.filter { it.category == selectedCategory }
     }
 
-    Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
-        topBar = {
-            PremiumTopBar(searchQuery) { searchQuery = it }
-        },
-        bottomBar = { PremiumBottomBar() }
-    ) { padding ->
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.padding(padding).fillMaxSize().background(MaterialTheme.colorScheme.background),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            // HERO STATS BENTO — 3 cards
-            item(span = { GridItemSpan(2) }) {
-                HeroStatsRow(total = widgets.size, active = 8, rating = "4.8")
+    // Liquid Glass scaffold: gradient background with aurora orbs
+    Box(modifier = Modifier.fillMaxSize()) {
+        // BackgroundExtensionEffect equivalent: full-screen liquid glass gradient
+        Box(modifier = Modifier.fillMaxSize().background(Brush.linearGradient(
+            listOf(Color(0xFFFDF7FF), Color(0xFFE9DDFF), Color(0xFFDAF8FF), Color(0xFFFFF8F7))
+        )))
+        // Aurora orbs for refraction
+        Box(modifier = Modifier.fillMaxSize().background(Brush.radialGradient(
+            colors = listOf(Color(0xFF7B61FF).copy(alpha=0.20f), Color.Transparent), radius = 900f
+        )))
+        Box(modifier = Modifier.fillMaxSize().background(Brush.radialGradient(
+            colors = listOf(Color(0xFF00D1C1).copy(alpha=0.12f), Color.Transparent), radius = 700f
+        )))
+
+        Scaffold(
+            containerColor = Color.Transparent,
+            topBar = {
+                GlassTopBar(searchQuery) { searchQuery = it }
+            },
+            bottomBar = { LiquidGlassBottomBar() }
+        ) { padding ->
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.padding(padding).fillMaxSize().background(Color.Transparent),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                // HERO STATS — liquid glass container group
+                item(span = { GridItemSpan(2) }) {
+                    GlassStatsRow(total = widgets.size, active = 10, rating = "4.8")
+                }
+                // FEATURED HERO — liquid glass bento (full width)
+                item(span = { GridItemSpan(2) }) {
+                    LiquidGlassFeaturedCard(
+                        onAdd = { showAddDialog = widgets.first { it.id == "digital" } },
+                        onPreview = { showDetail = widgets.first { it.id == "digital" } }
+                    )
+                }
+                // Trending chips
+                item(span = { GridItemSpan(2) }) {
+                    TrendingRow()
+                }
+                // Category filters — glass style
+                item(span = { GridItemSpan(2) }) {
+                    CategoryFilterRow(categories, selectedCategory) { selectedCategory = it }
+                }
+                item(span = { GridItemSpan(2) }) {
+                    GlassResultBar(count = filtered.size, onClear = { selectedCategory = "All"; searchQuery = "" })
+                }
+                // BENTO GRID — varied spans with liquid glass cards
+                itemsIndexed(filtered, span = { _, w ->
+                    when (w.size) {
+                        BentoSize.Hero -> GridItemSpan(2)
+                        BentoSize.Wide -> GridItemSpan(2)
+                        else -> GridItemSpan(1)
+                    }
+                }) { _, w ->
+                    LiquidGlassWidgetCard(widget = w, onAdd = { showAddDialog = w }, onDetail = { showDetail = w })
+                }
+                item(span = { GridItemSpan(2) }) { HowToGlassBento() }
+                item(span = { GridItemSpan(2) }) { QuoteGlassBento() }
+                item(span = { GridItemSpan(2) }) {
+                    FooterGlassBento()
+                    Spacer(Modifier.height(12.dp))
+                }
             }
-            // FEATURED HERO BENTO (full width)
-            item(span = { GridItemSpan(2) }) {
-                FeaturedHeroCard(
-                    onAdd = { showAddDialog = widgets.first { it.id == "digital" } },
-                    onPreview = { showDetail = widgets.first { it.id == "digital" } }
+
+            showAddDialog?.let { w ->
+                AddWidgetDialog(w,
+                    onDismiss = { showAddDialog = null },
+                    onConfirm = { showAddDialog = null; pinWidget(context, w) }
                 )
             }
-            // Trending chips horizontal
-            item(span = { GridItemSpan(2) }) {
-                TrendingRow()
+            showDetail?.let { w ->
+                DetailBottomSheet(w,
+                    onDismiss = { showDetail = null },
+                    onAdd = { showDetail = null; showAddDialog = w }
+                )
             }
-            // Category filters — pill shaped MD3 Expressive
-            item(span = { GridItemSpan(2) }) {
-                CategoryFilterRow(categories, selectedCategory) { selectedCategory = it }
-            }
-            // Result count
-            item(span = { GridItemSpan(2) }) {
-                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 4.dp)) {
-                    Text("${filtered.size} widgets", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Spacer(Modifier.width(8.dp))
-                    Box(modifier = Modifier.height(1.dp).weight(1f).background(MaterialTheme.colorScheme.outlineVariant))
-                    Spacer(Modifier.width(8.dp))
-                    AssistChip(onClick = { selectedCategory = "All"; searchQuery = "" }, label = { Text("Clear") }, leadingIcon = { Icon(Icons.Filled.Clear, null, Modifier.size(14.dp)) })
-                }
-            }
-            // BENTO GRID — varied spans
-            itemsIndexed(filtered, span = { idx, w ->
-                when (w.size) {
-                    BentoSize.Hero -> GridItemSpan(2)
-                    BentoSize.Wide -> GridItemSpan(2)
-                    else -> GridItemSpan(1)
-                }
-            }) { idx, w ->
-                PremiumWidgetCard(widget = w, onAdd = { showAddDialog = w }, onDetail = { showDetail = w })
-            }
-            // How to — bento style
-            item(span = { GridItemSpan(2) }) {
-                HowToBento()
-            }
-            // Quote & tips
-            item(span = { GridItemSpan(2) }) {
-                QuoteBento()
-            }
-            // Footer
-            item(span = { GridItemSpan(2) }) {
-                FooterBento()
-                Spacer(Modifier.height(12.dp))
-            }
-        }
-
-        // Dialogs
-        showAddDialog?.let { w ->
-            AddWidgetDialog(w,
-                onDismiss = { showAddDialog = null },
-                onConfirm = { showAddDialog = null; pinWidget(context, w) }
-            )
-        }
-        showDetail?.let { w ->
-            DetailBottomSheet(w,
-                onDismiss = { showDetail = null },
-                onAdd = { showDetail = null; showAddDialog = w }
-            )
         }
     }
 }
 
-// ===== PREMIUM COMPONENTS — UI/UX Pro Max: Bento + MD3 Expressive =====
+// ===== LIQUID GLASS COMPONENTS (Apple WWDC25 -> Android Compose) =====
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PremiumTopBar(query: String, onQueryChange: (String) -> Unit) {
-    TopAppBar(
-        title = {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+fun GlassTopBar(query: String, onQueryChange: (String) -> Unit) {
+    // Liquid glass top bar: .glassEffect(.regular) + .backgroundExtensionEffect style
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp),
+        color = Color.White.copy(alpha = 0.72f),
+        tonalElevation = 0.dp,
+        shadowElevation = 8.dp
+    ) {
+        Box(modifier = Modifier.background(
+            Brush.linearGradient(listOf(Color.White.copy(alpha=0.35f), Color.White.copy(alpha=0.08f)))
+        ).padding(start=16.dp, end=16.dp, top=12.dp, bottom=12.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
                 Box(
                     modifier = Modifier.size(40.dp)
                         .clip(RoundedCornerShape(12.dp))
@@ -208,46 +227,56 @@ fun PremiumTopBar(query: String, onQueryChange: (String) -> Unit) {
                     Icon(Icons.Filled.Widgets, null, tint = Color.White, modifier = Modifier.size(20.dp))
                 }
                 Spacer(Modifier.width(10.dp))
-                Column {
+                Column(modifier=Modifier.weight(1f)) {
                     Text("Widgetfy", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold, letterSpacing = (-0.5).sp))
-                    Text("Premium • 20 Widgets", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                    Text("Liquid Glass • 26 Widgets", style = MaterialTheme.typography.labelSmall, color = Color(0xFF6750A4), fontWeight=FontWeight.Bold)
                 }
-            }
-        },
-        actions = {
-            IconButton(onClick = {}) { Icon(Icons.Filled.Notifications, null, tint = MaterialTheme.colorScheme.onSurface) }
-            IconButton(onClick = {}) {
+                IconButton(onClick = {}) { Icon(Icons.Filled.Notifications, null, tint = Color(0xFF6750A4)) }
                 Box(modifier = Modifier.size(32.dp).clip(CircleShape).background(Color(0xFFE8DEF8)), contentAlignment = Alignment.Center) {
                     Text("V", color = Color(0xFF6750A4), fontWeight = FontWeight.Bold, fontSize = 12.sp)
                 }
             }
-        },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface)
-    )
-}
-
-@Composable
-fun PremiumBottomBar() {
-    NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceContainer, tonalElevation = 8.dp) {
-        NavigationBarItem(selected = true, onClick = {}, icon = { Icon(Icons.Filled.Home, null) }, label = { Text("Home", fontSize = 11.sp) })
-        NavigationBarItem(selected = false, onClick = {}, icon = { Icon(Icons.Filled.Category, null) }, label = { Text("Browse", fontSize = 11.sp) })
-        NavigationBarItem(selected = false, onClick = {}, icon = { Icon(Icons.Filled.Favorite, null) }, label = { Text("Fav", fontSize = 11.sp) })
-        NavigationBarItem(selected = false, onClick = {}, icon = { Icon(Icons.Filled.Settings, null) }, label = { Text("Settings", fontSize = 11.sp) })
+        }
     }
 }
 
 @Composable
-fun HeroStatsRow(total: Int, active: Int, rating: String) {
-    Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-        StatBentoCard("$total", "Widgets", Icons.Filled.Widgets, listOf(Color(0xFF6750A4), Color(0xFF9C88FF)), Modifier.weight(1f))
-        StatBentoCard("$active", "Active", Icons.Filled.CheckCircle, listOf(Color(0xFF0D9488), Color(0xFF5BD8CC)), Modifier.weight(1f))
-        StatBentoCard(rating, "Rating", Icons.Filled.Star, listOf(Color(0xFFE11D48), Color(0xFFFB7185)), Modifier.weight(1f))
+fun LiquidGlassBottomBar() {
+    // GlassEffectContainer: groups nav items with shared morphing spacing(like Apple WWDC25)
+    Box(modifier = Modifier.fillMaxWidth().padding(12.dp)) {
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(24.dp),
+            color = Color.White.copy(alpha = 0.82f),
+            shadowElevation = 12.dp,
+            tonalElevation = 0.dp
+        ) {
+            Box(modifier = Modifier.background(Brush.linearGradient(listOf(Color.White.copy(alpha=0.45f), Color.White.copy(alpha=0.12f))))) {
+                NavigationBar(containerColor = Color.Transparent, tonalElevation = 0.dp, modifier=Modifier.height(64.dp)) {
+                    NavigationBarItem(selected = true, onClick = {}, icon = { Icon(Icons.Filled.Home, null) }, label = { Text("Home", fontSize = 11.sp) })
+                    NavigationBarItem(selected = false, onClick = {}, icon = { Icon(Icons.Filled.Category, null) }, label = { Text("Browse", fontSize = 11.sp) })
+                    NavigationBarItem(selected = false, onClick = {}, icon = { Icon(Icons.Filled.Favorite, null) }, label = { Text("Fav", fontSize = 11.sp) })
+                    NavigationBarItem(selected = false, onClick = {}, icon = { Icon(Icons.Filled.Settings, null) }, label = { Text("Settings", fontSize = 11.sp) })
+                }
+            }
+        }
     }
 }
 
 @Composable
-fun StatBentoCard(value: String, label: String, icon: ImageVector, gradient: List<Color>, modifier: Modifier = Modifier) {
-    Card(modifier = modifier, shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.Transparent), elevation = CardDefaults.cardElevation(2.dp)) {
+fun GlassStatsRow(total: Int, active: Int, rating: String) {
+    GlassEffectContainer(spacing=10.dp) {
+        Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
+            GlassStatCard("$total", "Widgets", Icons.Filled.Widgets, listOf(Color(0xFF6750A4), Color(0xFF9C88FF)), Modifier.weight(1f))
+            GlassStatCard("$active", "Active", Icons.Filled.CheckCircle, listOf(Color(0xFF0D9488), Color(0xFF5BD8CC)), Modifier.weight(1f))
+            GlassStatCard(rating, "Rating", Icons.Filled.Star, listOf(Color(0xFFE11D48), Color(0xFFFB7185)), Modifier.weight(1f))
+        }
+    }
+}
+
+@Composable
+fun GlassStatCard(value: String, label: String, icon: ImageVector, gradient: List<Color>, modifier: Modifier = Modifier) {
+    Card(modifier = modifier, shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.Transparent), elevation = CardDefaults.cardElevation(4.dp)) {
         Box(modifier = Modifier.background(Brush.linearGradient(gradient)).padding(14.dp).fillMaxWidth()) {
             Column {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -265,10 +294,11 @@ fun StatBentoCard(value: String, label: String, icon: ImageVector, gradient: Lis
 }
 
 @Composable
-fun FeaturedHeroCard(onAdd: () -> Unit, onPreview: () -> Unit) {
+fun LiquidGlassFeaturedCard(onAdd: () -> Unit, onPreview: () -> Unit) {
     Card(shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth(), elevation = CardDefaults.cardElevation(8.dp)) {
         Box(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .background(Brush.linearGradient(listOf(Color(0xFF6750A4), Color(0xFF0D9488), Color(0xFFE11D48))))
                 .padding(18.dp)
         ) {
@@ -278,13 +308,13 @@ fun FeaturedHeroCard(onAdd: () -> Unit, onPreview: () -> Unit) {
                         Row(modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
                             Box(modifier = Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF00FF94)))
                             Spacer(Modifier.width(6.dp))
-                            Text("NEW • 20 PREMIUM WIDGETS", color = Color.White, fontSize = 10.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                            Text("NEW • 26 LIQUID GLASS WIDGETS", color = Color.White, fontSize = 10.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
                         }
                     }
                     Spacer(Modifier.height(12.dp))
-                    Text("Bento Widgets\nfor Home Screen", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 24.sp)
+                    Text("Liquid Glass\nfor Home Screen", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 24.sp)
                     Spacer(Modifier.height(6.dp))
-                    Text("Material 3 Expressive • Glassmorphism\nDrag & place instantly", color = Color.White.copy(alpha = 0.85f), fontSize = 11.sp, lineHeight = 14.sp)
+                    Text("iOS 26 Liquid Glass → Android\nTranslucent • Refractive • Premium", color = Color.White.copy(alpha = 0.85f), fontSize = 11.sp, lineHeight = 14.sp)
                     Spacer(Modifier.height(14.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(onClick = onAdd, shape = RoundedCornerShape(99.dp), colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color(0xFF6750A4)), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
@@ -321,12 +351,12 @@ fun FeaturedHeroCard(onAdd: () -> Unit, onPreview: () -> Unit) {
 
 @Composable
 fun TrendingRow() {
-    val tags = listOf("Trending 🔥", "New ✨", "Popular ⭐", "Clock", "Productivity", "Health")
+    val tags = listOf("Trending 🔥", "New ✨", "Popular ⭐", "Clock", "Productivity", "Health", "Liquid Glass")
     LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         items(tags.size) { i ->
-            Surface(shape = RoundedCornerShape(99.dp), color = if (i == 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant) {
+            Surface(shape = RoundedCornerShape(99.dp), color = if (i == 0) Color(0xFF6750A4) else Color.White.copy(alpha=0.78f), shadowElevation = 2.dp) {
                 Row(modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Text(tags[i], color = if (i == 0) Color.White else MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp, fontWeight = FontWeight.Medium)
+                    Text(tags[i], color = if (i == 0) Color.White else Color(0xFF6750A4), fontSize = 12.sp, fontWeight = FontWeight.Medium)
                 }
             }
         }
@@ -346,15 +376,17 @@ fun CategoryFilterRow(categories: List<String>, selected: String, onSelect: (Str
                 leadingIcon = if (isSelected) ({ Icon(Icons.Filled.Check, null, Modifier.size(16.dp)) }) else null,
                 shape = RoundedCornerShape(99.dp),
                 colors = FilterChipDefaults.filterChipColors(
-                    selectedContainerColor = MaterialTheme.colorScheme.primary,
+                    selectedContainerColor = Color(0xFF6750A4),
                     selectedLabelColor = Color.White,
-                    selectedLeadingIconColor = Color.White
+                    selectedLeadingIconColor = Color.White,
+                    containerColor = Color.White.copy(alpha=0.75f),
+                    labelColor = Color(0xFF49454F)
                 ),
                 border = FilterChipDefaults.filterChipBorder(
                     enabled = true,
                     selected = isSelected,
-                    borderColor = MaterialTheme.colorScheme.outlineVariant,
-                    selectedBorderColor = MaterialTheme.colorScheme.primary,
+                    borderColor = Color.White.copy(alpha=0.5f),
+                    selectedBorderColor = Color(0xFF6750A4),
                     borderWidth = 1.dp,
                     selectedBorderWidth = 1.dp
                 )
@@ -364,84 +396,96 @@ fun CategoryFilterRow(categories: List<String>, selected: String, onSelect: (Str
 }
 
 @Composable
-fun PremiumWidgetCard(widget: WidgetInfo, onAdd: () -> Unit, onDetail: () -> Unit) {
+fun GlassResultBar(count: Int, onClear: () -> Unit) {
+    Surface(shape = RoundedCornerShape(16.dp), color = Color.White.copy(alpha=0.65f), shadowElevation = 2.dp) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(horizontal=12.dp, vertical=8.dp).fillMaxWidth()) {
+            Text("$count widgets", style = MaterialTheme.typography.labelMedium, color = Color(0xFF6750A4), fontWeight=FontWeight.Bold)
+            Spacer(Modifier.width(8.dp))
+            Box(modifier = Modifier.height(1.dp).weight(1f).background(Color(0xFFE8DEF8)))
+            Spacer(Modifier.width(8.dp))
+            AssistChip(onClick = onClear, label = { Text("Clear", fontSize=11.sp) }, leadingIcon = { Icon(Icons.Filled.Clear, null, Modifier.size(12.dp)) }, colors=AssistChipDefaults.assistChipColors(containerColor=Color.White))
+        }
+    }
+}
+
+@Composable
+fun LiquidGlassWidgetCard(widget: WidgetInfo, onAdd: () -> Unit, onDetail: () -> Unit) {
     val isWide = widget.size == BentoSize.Wide || widget.size == BentoSize.Hero
+    // Liquid Glass card: translucent surface + gradient header + glass border
     Card(
         shape = RoundedCornerShape(24.dp),
         modifier = Modifier.fillMaxWidth().clickable { onDetail() },
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha=0.82f)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
-        Column {
-            // Header with gradient — uses bento heights
-            Box(
-                modifier = Modifier.fillMaxWidth().height(if (isWide) 110.dp else 96.dp)
-                    .background(Brush.linearGradient(widget.gradient))
-                    .padding(14.dp)
-            ) {
-                // Badge row
-                Row(modifier = Modifier.align(Alignment.TopStart).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Box(modifier = Modifier.size(32.dp).clip(RoundedCornerShape(12.dp)).background(Color.White.copy(alpha = 0.2f)), contentAlignment = Alignment.Center) {
-                            Icon(widget.icon, null, tint = Color.White, modifier = Modifier.size(16.dp))
+        Box(modifier = Modifier.background(Brush.linearGradient(listOf(Color.White.copy(alpha=0.28f), Color.White.copy(alpha=0.06f))))) {
+            Column {
+                Box(
+                    modifier = Modifier.fillMaxWidth().height(if (isWide) 110.dp else 96.dp)
+                        .clip(RoundedCornerShape(topStart=24.dp, topEnd=24.dp))
+                        .background(Brush.linearGradient(widget.gradient))
+                        .padding(14.dp)
+                ) {
+                    Row(modifier = Modifier.align(Alignment.TopStart).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(modifier = Modifier.size(32.dp).clip(RoundedCornerShape(12.dp)).background(Color.White.copy(alpha = 0.2f)), contentAlignment = Alignment.Center) {
+                                Icon(widget.icon, null, tint = Color.White, modifier = Modifier.size(16.dp))
+                            }
+                            Spacer(Modifier.width(8.dp))
+                            Column {
+                                Text(widget.category.uppercase(), color = Color.White.copy(alpha = 0.9f), fontSize = 9.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                                Text(widget.stats, color = Color.White.copy(alpha = 0.8f), fontSize = 10.sp)
+                            }
                         }
-                        Spacer(Modifier.width(8.dp))
-                        Column {
-                            Text(widget.category.uppercase(), color = Color.White.copy(alpha = 0.9f), fontSize = 9.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
-                            Text(widget.stats, color = Color.White.copy(alpha = 0.8f), fontSize = 10.sp)
-                        }
-                    }
-                    if (widget.isNew) {
-                        Surface(shape = RoundedCornerShape(99.dp), color = Color(0xFFE11D48)) {
-                            Text("NEW", modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = Color.White, fontSize = 8.sp, fontWeight = FontWeight.Bold)
-                        }
-                    } else if (widget.isPopular) {
-                        Surface(shape = RoundedCornerShape(99.dp), color = Color.White.copy(alpha = 0.2f)) {
-                            Row(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-                                Icon(Icons.Filled.Star, null, tint = Color.White, modifier = Modifier.size(10.dp))
-                                Spacer(Modifier.width(4.dp))
-                                Text("HOT", color = Color.White, fontSize = 8.sp, fontWeight = FontWeight.Bold)
+                        if (widget.isNew) {
+                            Surface(shape = RoundedCornerShape(99.dp), color = Color(0xFFE11D48)) {
+                                Text("NEW", modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = Color.White, fontSize = 8.sp, fontWeight = FontWeight.Bold)
+                            }
+                        } else if (widget.isPopular) {
+                            Surface(shape = RoundedCornerShape(99.dp), color = Color.White.copy(alpha = 0.2f)) {
+                                Row(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(Icons.Filled.Star, null, tint = Color.White, modifier = Modifier.size(10.dp))
+                                    Spacer(Modifier.width(4.dp))
+                                    Text("HOT", color = Color.White, fontSize = 8.sp, fontWeight = FontWeight.Bold)
+                                }
                             }
                         }
                     }
-                }
-                // Preview text at bottom
-                Column(modifier = Modifier.align(Alignment.BottomStart)) {
-                    Text(widget.previewText, color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    Text(widget.name, color = Color.White.copy(alpha = 0.9f), fontSize = 10.sp)
-                }
-                // Decorative circle
-                Box(
-                    modifier = Modifier.align(Alignment.TopEnd).size(80.dp).clip(CircleShape)
-                        .background(Color.White.copy(alpha = 0.08f))
-                )
-            }
-            // Body
-            Column(modifier = Modifier.padding(14.dp)) {
-                Text(widget.name, style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Spacer(Modifier.height(4.dp))
-                Text(widget.desc, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, lineHeight = 14.sp, overflow = TextOverflow.Ellipsis, modifier = Modifier.heightIn(min = 28.dp))
-                Spacer(Modifier.height(12.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-                    Button(
-                        onClick = onAdd,
-                        modifier = Modifier.weight(1f).height(40.dp),
-                        shape = RoundedCornerShape(99.dp),
-                        contentPadding = PaddingValues(horizontal = 12.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
-                    ) {
-                        Icon(Icons.Filled.Add, null, Modifier.size(16.dp))
-                        Spacer(Modifier.width(6.dp))
-                        Text("Add", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    Column(modifier = Modifier.align(Alignment.BottomStart)) {
+                        Text(widget.previewText, color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(widget.name, color = Color.White.copy(alpha = 0.9f), fontSize = 10.sp)
                     }
-                    OutlinedButton(
-                        onClick = onDetail,
-                        modifier = Modifier.height(40.dp),
-                        shape = RoundedCornerShape(99.dp),
-                        contentPadding = PaddingValues(horizontal = 14.dp),
-                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
-                    ) {
-                        Icon(Icons.Filled.Visibility, null, Modifier.size(16.dp))
+                    Box(
+                        modifier = Modifier.align(Alignment.TopEnd).size(80.dp).clip(CircleShape)
+                            .background(Color.White.copy(alpha = 0.08f))
+                    )
+                }
+                Column(modifier = Modifier.padding(14.dp)) {
+                    Text(widget.name, style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Spacer(Modifier.height(4.dp))
+                    Text(widget.desc, style = MaterialTheme.typography.bodySmall, color = Color(0xFF49454F), maxLines = 2, lineHeight = 14.sp, overflow = TextOverflow.Ellipsis, modifier = Modifier.heightIn(min = 28.dp))
+                    Spacer(Modifier.height(12.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                        Button(
+                            onClick = onAdd,
+                            modifier = Modifier.weight(1f).height(40.dp),
+                            shape = RoundedCornerShape(99.dp),
+                            contentPadding = PaddingValues(horizontal = 12.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6750A4))
+                        ) {
+                            Icon(Icons.Filled.Add, null, Modifier.size(16.dp))
+                            Spacer(Modifier.width(6.dp))
+                            Text("Add", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                        }
+                        OutlinedButton(
+                            onClick = onDetail,
+                            modifier = Modifier.height(40.dp),
+                            shape = RoundedCornerShape(99.dp),
+                            contentPadding = PaddingValues(horizontal = 14.dp),
+                            border = BorderStroke(1.dp, Color(0xFFE8DEF8))
+                        ) {
+                            Icon(Icons.Filled.Visibility, null, Modifier.size(16.dp), tint=Color(0xFF6750A4))
+                        }
                     }
                 }
             }
@@ -450,50 +494,50 @@ fun PremiumWidgetCard(widget: WidgetInfo, onAdd: () -> Unit, onDetail: () -> Uni
 }
 
 @Composable
-fun HowToBento() {
-    Card(shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
-        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-            Box(modifier = Modifier.size(44.dp).clip(RoundedCornerShape(14.dp)).background(MaterialTheme.colorScheme.primary), contentAlignment = Alignment.Center) {
+fun HowToGlassBento() {
+    Surface(shape = RoundedCornerShape(20.dp), color = Color.White.copy(alpha=0.75f), shadowElevation = 4.dp) {
+        Row(modifier = Modifier.padding(16.dp).background(Brush.linearGradient(listOf(Color.White.copy(alpha=0.25f), Color.Transparent))).padding(0.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(modifier = Modifier.size(44.dp).clip(RoundedCornerShape(14.dp)).background(Color(0xFF6750A4)), contentAlignment = Alignment.Center) {
                 Icon(Icons.Filled.TouchApp, null, tint = Color.White, modifier = Modifier.size(22.dp))
             }
             Spacer(Modifier.width(14.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text("How to add widgets?", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
                 Spacer(Modifier.height(4.dp))
-                Text("Long press home → Widgets → Widgetfy → Drag. Or tap Add for instant pin (Android 8+).", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSecondaryContainer)
+                Text("Long press home → Widgets → Widgetfy → Drag. Or tap Add for instant pin (Android 8+). Liquid glass on every widget!", style = MaterialTheme.typography.bodySmall, color = Color(0xFF49454F))
             }
         }
     }
 }
 
 @Composable
-fun QuoteBento() {
+fun QuoteGlassBento() {
     val quote = QuoteProvider.ofDay()
-    Card(shape = RoundedCornerShape(20.dp), modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
+    Surface(shape = RoundedCornerShape(20.dp), modifier = Modifier.fillMaxWidth(), color = Color.White.copy(alpha=0.72f), shadowElevation = 4.dp) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.Top) {
-            Box(modifier = Modifier.size(40.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.primaryContainer), contentAlignment = Alignment.Center) {
-                Icon(Icons.Filled.FormatQuote, null, tint = MaterialTheme.colorScheme.onPrimaryContainer, modifier = Modifier.size(20.dp))
+            Box(modifier = Modifier.size(40.dp).clip(RoundedCornerShape(12.dp)).background(Color(0xFFE8DEF8)), contentAlignment = Alignment.Center) {
+                Icon(Icons.Filled.FormatQuote, null, tint = Color(0xFF6750A4), modifier = Modifier.size(20.dp))
             }
             Spacer(Modifier.width(12.dp))
             Column {
-                Text("Quote of the Day", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                Text("Quote of the Day", style = MaterialTheme.typography.labelMedium, color = Color(0xFF6750A4))
                 Spacer(Modifier.height(6.dp))
                 Text("\"${quote.first}\"", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium, fontStyle = androidx.compose.ui.text.font.FontStyle.Italic))
                 Spacer(Modifier.height(4.dp))
-                Text("— ${quote.second}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("— ${quote.second}", style = MaterialTheme.typography.bodySmall, color = Color(0xFF49454F))
             }
         }
     }
 }
 
 @Composable
-fun FooterBento() {
-    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
+fun FooterGlassBento() {
+    Surface(shape = RoundedCornerShape(16.dp), color = Color.White.copy(alpha=0.70f), shadowElevation = 2.dp) {
         Column(modifier = Modifier.padding(16.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Made with ❤️ in India", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Text("20 Widgets • 100% Real • No Ads • Free Forever", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("Made with ❤️ in India • Liquid Glass Edition", style = MaterialTheme.typography.labelMedium, color = Color(0xFF49454F), fontWeight=FontWeight.Bold)
+            Text("26 Widgets • Liquid Glass on All • No Ads • Free Forever", style = MaterialTheme.typography.bodySmall, color = Color(0xFF49454F))
             Spacer(Modifier.height(8.dp))
-            Text("com.widgetfy.com • v2.0.0 • Material 3 Expressive + Bento", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("com.widgetfy.com • v3.0.0 • Liquid Glass + Bento", style = MaterialTheme.typography.labelSmall, color = Color(0xFF6750A4))
         }
     }
 }
@@ -504,7 +548,7 @@ fun AddWidgetDialog(widget: WidgetInfo, onDismiss: () -> Unit, onConfirm: () -> 
         onDismissRequest = onDismiss,
         icon = { Box(modifier = Modifier.size(48.dp).clip(RoundedCornerShape(14.dp)).background(Brush.linearGradient(widget.gradient)), contentAlignment = Alignment.Center) { Icon(widget.icon, null, tint = Color.White) } },
         title = { Text("Add ${widget.name}?") },
-        text = { Text("'${widget.name}' ko home screen par pin karega. Launcher supported hona chahiye (Android 8+). Nahi toh long press home → Widgets se manual add karo.") },
+        text = { Text("'${widget.name}' ko home screen par pin karega. Launcher supported hona chahiye (Android 8+). Nahi toh long press home → Widgets se manual add karo. Liquid glass design inside!") },
         confirmButton = { Button(onClick = onConfirm, shape = RoundedCornerShape(99.dp)) { Text("Add to Home") } },
         dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } },
         shape = RoundedCornerShape(24.dp)
@@ -547,7 +591,7 @@ fun DetailBottomSheet(widget: WidgetInfo, onDismiss: () -> Unit, onAdd: () -> Un
             Spacer(Modifier.height(12.dp))
             Text("Features", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
             Spacer(Modifier.height(8.dp))
-            Text("• Real working widget, home screen pin supported\n• Updates automatically every minute\n• Resizable & reconfigurable\n• Light/Dark theme aware\n• Battery optimized (WorkManager)", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 18.sp)
+            Text("• Real working widget with Liquid Glass background\n• Updates automatically every minute\n• Resizable & reconfigurable\n• Light/Dark theme aware • Glass borders\n• Battery optimized (WorkManager)", style = MaterialTheme.typography.bodySmall, color = Color(0xFF49454F), lineHeight = 18.sp)
             Spacer(Modifier.height(32.dp))
         }
     }

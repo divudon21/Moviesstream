@@ -120,15 +120,15 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v2.0.0-${{ github.run_number }}
-          name: "Widgetfy v2.0.0 Bento — Build ${{ github.run_number }}"
+          tag_name: v3.0.0-${{ github.run_number }}
+          name: "Widgetfy v3.0.0 Liquid Glass — Build ${{ github.run_number }}"
           body: |
-            ## Widgetfy v2.0.0 — Premium Bento Edition ✨
+            ## Widgetfy v3.0.0 — Liquid Glass Edition ✨
 
-            📦 **Package:** `com.widgetfy.com` | **20 Real Widgets** | **Material 3 Expressive + Bento Box Grid**
-            🎨 **Design:** ui-ux-pro-max skill v2.15.0 — Violet #6750A4 + Teal + Rose palette
+            📦 **Package:** `com.widgetfy.com` | **26 Real Widgets** | **Liquid Glass + Bento + Material 3 Expressive**
+            🎨 **Design:** haider-nawaz/liquid-glass-skill (Apple WWDC25) → Android: translucent gradients + glass borders + aurora blur | Violet #6750A4
 
-            **20 Widgets:** Digital/Analog/Flip/World Clock • Battery Pro • Weather Glass • Search • Steps • Calendar Bento • Tasks • Photo • Daily Zen • ★ Music Player • Countdown • Finance Pulse • Health Ring • News • Crypto Ticker • Habit Streak • Reminder
+            **26 Widgets (all with liquid glass background):** Digital/Analog/Flip/World Clock • Battery Pro • Weather Glass • Search • Steps • Calendar Bento • Tasks • Photo • Daily Zen • Music Player • Countdown • Finance Pulse • Health Ring • News • Crypto Ticker • Habit Streak • Reminder • ★ NEW: Focus Timer • Savings Goal • Breathe • Quick Dial • VPN Control • Screen Time
 
             ### Downloads (3 APKs ONLY)
             - **universal.apk** → All devices (recommended)
@@ -138,9 +138,9 @@ jobs:
             ### How to install
             1. Download universal.apk
             2. Enable Install from Unknown Sources
-            3. Install & long-press home → Widgets → Widgetfy → Drag any of 20 widgets
+            3. Install & long-press home → Widgets → Widgetfy → Drag any of 26 widgets (liquid glass on every widget!)
 
-            _Built via GitHub Actions with ABI splits — triggered on push to ${{ github.ref_name }} — v2 Bento Edition_
+            _Built via GitHub Actions with ABI splits — triggered on push to ${{ github.ref_name }} — v3 Liquid Glass Edition_
           files: |
             release-apks/arm64-v8a.apk
             release-apks/armeabi-v7a.apk
