@@ -72,6 +72,9 @@ jobs:
           tail -n 400 build.log || cat build.log || echo "no log"
           echo "=== ERRORS ==="
           grep -i -E "error|exception|failed" build.log | head -n 100 || true
+          echo "=== EMIT ANNOTATIONS ==="
+          grep -m 20 -i "e: " build.log | while IFS= read -r line; do echo "::error::$line"; done || true
+          grep -m 20 "Unresolved reference" build.log | while IFS= read -r line; do echo "::error::$line"; done || true
 
       - name: Upload build log on failure
         if: always()
