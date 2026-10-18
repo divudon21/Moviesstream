@@ -53,17 +53,21 @@ jobs:
 
       - name: Build Release APKs
         run: |
-          gradle assembleRelease --stacktrace --info 2>&1 | tee build.log
+          gradle clean assembleRelease --stacktrace --info 2>&1 | tee build.log
           echo "=== BUILD LOG TAIL ==="
           tail -n 200 build.log || true
           ls -lh app/build/outputs/apk/release/ || echo "no outputs yet"
-          if [ ! -f app/build/outputs/apk/release/*.apk ] 2>/dev/null; then echo "APK missing, checking for errors"; cat build.log | grep -i "error" | head -n 100 || true; fi
+          echo "=== FIND APKs ==="
+          find app/build -name "*.apk" -type f -exec ls -lh {} \; || echo "no APKs found"
+          if [ -z "$(find app/build -name "*.apk" -type f 2>/dev/null)" ]; then echo "APK missing, checking for errors"; cat build.log | grep -i "error\|failed" | head -n 100 || true; cat build.log | tail -n 100; fi
 
       - name: List APK outputs
         run: |
-          find app/build -name "*.apk" -type f -exec ls -lh {} \;
+          echo "=== LIST APK OUTPUTS STEP ==="
+          find app/build -name "*.apk" -type f -exec ls -lh {} \; || echo "no apk in app/build"
           echo "---"
-          ls -R app/build/outputs/ || true
+          ls -R app/build/outputs/ 2>&1 || echo "no outputs folder"
+          cat build.log | grep -E "BUILD SUCCESS|BUILD FAILED" | tail || true
 
       - name: Rename APKs for release
         run: |
