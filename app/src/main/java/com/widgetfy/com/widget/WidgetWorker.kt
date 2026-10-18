@@ -19,7 +19,15 @@ class WidgetWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params)
             CalendarWidget::class.java,
             QuoteWidget::class.java,
             WorldClockWidget::class.java,
-            StepCounterWidget::class.java
+            StepCounterWidget::class.java,
+            MusicWidget::class.java,
+            CountdownWidget::class.java,
+            FinanceWidget::class.java,
+            HealthWidget::class.java,
+            NewsWidget::class.java,
+            CryptoWidget::class.java,
+            HabitWidget::class.java,
+            ReminderWidget::class.java
         )
         for (cls in allWidgets) {
             val ids = mgr.getAppWidgetIds(ComponentName(context, cls))

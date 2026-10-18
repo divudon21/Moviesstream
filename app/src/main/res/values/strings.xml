@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Widgetfy</string>
-    <string name="app_tagline">Beautiful Widgets for Everyone</string>
-    <string name="app_desc">Add stunning, real working widgets to your home screen. Clock, Battery, Weather, Calendar &amp; more — all in one app!</string>
+    <string name="app_tagline">Premium Bento Widgets for Everyone</string>
+    <string name="app_desc">Add 20 stunning, real working bento widgets to your home screen. Material 3 Expressive • Clock, Health, Finance, Music &amp; more!</string>
 
     <string name="nav_home">Home</string>
     <string name="nav_widgets">Widgets</string>
@@ -37,6 +37,22 @@
     <string name="widget_world_desc">Multiple timezones in one widget.</string>
     <string name="widget_steps">Step Counter</string>
     <string name="widget_steps_desc">Track your daily steps.</string>
+    <string name="widget_music">Music Player</string>
+    <string name="widget_music_desc">Playback controls + album art widget.</string>
+    <string name="widget_countdown">Countdown</string>
+    <string name="widget_countdown_desc">Events birthdays - days left tracker.</string>
+    <string name="widget_finance">Finance Pulse</string>
+    <string name="widget_finance_desc">Budget expenses &amp; savings snapshot.</string>
+    <string name="widget_health">Health Ring</string>
+    <string name="widget_health_desc">Sleep heart &amp; hydration rings.</string>
+    <string name="widget_news">News Headlines</string>
+    <string name="widget_news_desc">Top headlines tap to read.</string>
+    <string name="widget_crypto">Crypto Ticker</string>
+    <string name="widget_crypto_desc">BTC ETH live price &amp; change.</string>
+    <string name="widget_habit">Habit Streak</string>
+    <string name="widget_habit_desc">Daily habits &amp; streak counter.</string>
+    <string name="widget_reminder">Quick Reminder</string>
+    <string name="widget_reminder_desc">Upcoming tasks &amp; alerts.</string>
 
     <string name="action_add_to_home">Add to Home</string>
     <string name="action_preview">Preview</string>
@@ -48,7 +64,7 @@
     <string name="settings_transparency">Widget Transparency</string>
     <string name="settings_dark_mode">Dark Mode</string>
     <string name="settings_auto_update">Auto Update Interval</string>
-    <string name="settings_about">About Widgetfy v1.0.0</string>
+    <string name="settings_about">About Widgetfy v2.0.0 • Bento Edition</string>
     <string name="settings_about_desc">Made with ❤️ in India. All widgets are 100% real and working.</string>
 
     <string name="empty_notes">No notes yet. Tap + to add!</string>

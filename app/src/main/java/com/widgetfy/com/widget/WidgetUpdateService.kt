@@ -19,7 +19,15 @@ class WidgetUpdateService : Service() {
             FlipClockWidget::class.java,
             WorldClockWidget::class.java,
             CalendarWidget::class.java,
-            QuoteWidget::class.java
+            QuoteWidget::class.java,
+            MusicWidget::class.java,
+            CountdownWidget::class.java,
+            FinanceWidget::class.java,
+            HealthWidget::class.java,
+            NewsWidget::class.java,
+            CryptoWidget::class.java,
+            HabitWidget::class.java,
+            ReminderWidget::class.java
         )
         for (cls in clocks) {
             val ids = mgr.getAppWidgetIds(ComponentName(this, cls))
