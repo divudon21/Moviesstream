@@ -99,15 +99,15 @@ jobs:
           cp app/build/outputs/apk/release/*.apk release-apks/ || true
           ls -lh release-apks/
           cd release-apks
-          # Normalize to requested names: arm64-v8a.apk, armeabi-v7a.apk, universal.apk
+          # Create only the 3 requested APKs
           for f in *arm64*.apk; do [ -f "$f" ] && cp "$f" "arm64-v8a.apk" && echo "created arm64-v8a.apk" || true; done
           for f in *v7a*.apk; do [ -f "$f" ] && cp "$f" "armeabi-v7a.apk" && echo "created armeabi-v7a.apk" || true; done
           for f in *universal*.apk; do [ -f "$f" ] && cp "$f" "universal.apk" && echo "created universal.apk" || true; done
-          # Also keep widgetfy prefixed for clarity
-          for f in *arm64*.apk; do [ -f "$f" ] && cp "$f" "widgetfy-arm64-v8a.apk" || true; done
-          for f in *v7a*.apk; do [ -f "$f" ] && cp "$f" "widgetfy-armeabi-v7a.apk" || true; done
-          for f in *universal*.apk; do [ -f "$f" ] && cp "$f" "widgetfy-universal.apk" || true; done
+          # Remove extra aliases - keep ONLY 3 requested files
+          rm -f app-*.apk widgetfy-*.apk 2>/dev/null || true
+          echo "=== Final release files (ONLY 3) ==="
           ls -lh
+          echo "Count: $(ls -1 *.apk 2>/dev/null | wc -l) files"
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v4
@@ -130,11 +130,10 @@ jobs:
 
             **20 Widgets:** Digital/Analog/Flip/World Clock • Battery Pro • Weather Glass • Search • Steps • Calendar Bento • Tasks • Photo • Daily Zen • ★ Music Player • Countdown • Finance Pulse • Health Ring • News • Crypto Ticker • Habit Streak • Reminder
 
-            ### Downloads (3 APK splits)
+            ### Downloads (3 APKs ONLY)
             - **universal.apk** → All devices (recommended)
             - **arm64-v8a.apk** → Modern 64-bit phones
             - **armeabi-v7a.apk** → Older 32-bit phones
-            - plus `widgetfy-*` and `app-*` aliases (9 files total)
 
             ### How to install
             1. Download universal.apk
@@ -142,11 +141,14 @@ jobs:
             3. Install & long-press home → Widgets → Widgetfy → Drag any of 20 widgets
 
             _Built via GitHub Actions with ABI splits — triggered on push to ${{ github.ref_name }} — v2 Bento Edition_
-          files: release-apks/*.apk
+          files: |
+            release-apks/arm64-v8a.apk
+            release-apks/armeabi-v7a.apk
+            release-apks/universal.apk
           draft: false
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Show build success
-        run: echo "✅ APKs built and released successfully!"
+        run: echo "✅ 3 APKs built and released successfully!"
