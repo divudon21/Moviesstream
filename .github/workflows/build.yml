@@ -65,8 +65,16 @@ jobs:
           # Fail if gradle failed
           if [ "$GRADLE_EXIT" -ne 0 ]; then echo "Gradle failed with $GRADLE_EXIT"; exit $GRADLE_EXIT; fi
 
-      - name: Upload build log on failure
+      - name: Show build log on failure
         if: failure()
+        run: |
+          echo "=== BUILD LOG (last 400 lines) ==="
+          tail -n 400 build.log || cat build.log || echo "no log"
+          echo "=== ERRORS ==="
+          grep -i -E "error|exception|failed" build.log | head -n 100 || true
+
+      - name: Upload build log on failure
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: build-log
@@ -74,6 +82,7 @@ jobs:
           retention-days: 7
 
       - name: List APK outputs
+        if: always()
         run: |
           echo "=== LIST APK OUTPUTS STEP ==="
           find app/build -name "*.apk" -type f -exec ls -lh {} \; || echo "no apk in app/build"

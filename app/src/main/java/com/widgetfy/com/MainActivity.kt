@@ -215,7 +215,7 @@ fun PremiumTopBar(query: String, onQueryChange: (String) -> Unit) {
             }
         },
         actions = {
-            IconButton(onClick = {}) { Icon(Icons.Outlined.Notifications, null, tint = MaterialTheme.colorScheme.onSurface) }
+            IconButton(onClick = {}) { Icon(Icons.Filled.Notifications, null, tint = MaterialTheme.colorScheme.onSurface) }
             IconButton(onClick = {}) {
                 Box(modifier = Modifier.size(32.dp).clip(CircleShape).background(Color(0xFFE8DEF8)), contentAlignment = Alignment.Center) {
                     Text("V", color = Color(0xFF6750A4), fontWeight = FontWeight.Bold, fontSize = 12.sp)
