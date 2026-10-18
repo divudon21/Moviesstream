@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget_light"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="📝 My Tasks"
+            android:textColor="#FF2D3436"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_widget_cell"
+            android:padding="4dp"
+            android:text="+ Add"
+            android:textColor="#FF6C5CE7"
+            android:textSize="9sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_todo_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_note"
+        android:drawablePadding="6dp"
+        android:text="☐ Buy groceries"
+        android:textColor="#FF2D3436"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_todo_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="☐ Meeting at 4 PM"
+        android:textColor="#FF2D3436"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_todo_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="☑ Call mom ❤️"
+        android:textColor="#FF636E72"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="3 tasks • Tap to open app"
+        android:textColor="#80636E72"
+        android:textSize="9sp" />
+</LinearLayout>

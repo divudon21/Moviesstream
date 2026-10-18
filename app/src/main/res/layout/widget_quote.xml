@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget_rounded"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="❝"
+        android:textColor="#FFFDCB6E"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/tv_quote_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="Believe you can and you\'re halfway there."
+        android:textColor="#FFFFFFFF"
+        android:textSize="13sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/tv_quote_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="— Theodore Roosevelt"
+        android:textColor="#CCFFFFFF"
+        android:textSize="10sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_widget_cell"
+        android:padding="4dp"
+        android:text="Daily Quote ✨"
+        android:textColor="#FFFDCB6E"
+        android:textSize="9sp" />
+</LinearLayout>

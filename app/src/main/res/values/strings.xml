@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Widgetfy</string>
+    <string name="app_tagline">Beautiful Widgets for Everyone</string>
+    <string name="app_desc">Add stunning, real working widgets to your home screen. Clock, Battery, Weather, Calendar &amp; more — all in one app!</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_widgets">Widgets</string>
+    <string name="nav_settings">Settings</string>
+
+    <string name="widget_category_clock">Clock &amp; Time</string>
+    <string name="widget_category_system">System &amp; Info</string>
+    <string name="widget_category_lifestyle">Lifestyle</string>
+    <string name="widget_category_productivity">Productivity</string>
+
+    <!-- Widget Names -->
+    <string name="widget_digital_clock">Digital Clock</string>
+    <string name="widget_digital_desc">Minimal digital clock with date. Updates every minute.</string>
+    <string name="widget_analog_clock">Analog Clock</string>
+    <string name="widget_analog_desc">Classic analog clock with smooth hands.</string>
+    <string name="widget_flip_clock">Flip Clock</string>
+    <string name="widget_flip_desc">Retro flip-style clock with bold typography.</string>
+    <string name="widget_battery">Battery Status</string>
+    <string name="widget_battery_desc">Live battery % with charging animation and health.</string>
+    <string name="widget_weather">Weather</string>
+    <string name="widget_weather_desc">Real-time weather with location and forecast.</string>
+    <string name="widget_calendar">Calendar</string>
+    <string name="widget_calendar_desc">Month view and upcoming events.</string>
+    <string name="widget_todo">To-Do &amp; Notes</string>
+    <string name="widget_todo_desc">Quick notes and tasks right on home screen.</string>
+    <string name="widget_photo">Photo Frame</string>
+    <string name="widget_photo_desc">Show your favorite photo as widget.</string>
+    <string name="widget_search">Search Bar</string>
+    <string name="widget_search_desc">Google search in one tap, with voice support.</string>
+    <string name="widget_quote">Daily Quote</string>
+    <string name="widget_quote_desc">Inspirational quote that refreshes daily.</string>
+    <string name="widget_world_clock">World Clock</string>
+    <string name="widget_world_desc">Multiple timezones in one widget.</string>
+    <string name="widget_steps">Step Counter</string>
+    <string name="widget_steps_desc">Track your daily steps.</string>
+
+    <string name="action_add_to_home">Add to Home</string>
+    <string name="action_preview">Preview</string>
+    <string name="action_customize">Customize</string>
+    <string name="action_added">Added! Check home screen</string>
+    <string name="action_not_supported">Pin widget not supported on this launcher</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_transparency">Widget Transparency</string>
+    <string name="settings_dark_mode">Dark Mode</string>
+    <string name="settings_auto_update">Auto Update Interval</string>
+    <string name="settings_about">About Widgetfy v1.0.0</string>
+    <string name="settings_about_desc">Made with ❤️ in India. All widgets are 100% real and working.</string>
+
+    <string name="empty_notes">No notes yet. Tap + to add!</string>
+    <string name="hint_add_note">Add a quick note…</string>
+
+    <string name="permission_denied">Permission denied</string>
+    <string name="search_hint">Search Google…</string>
+</resources>

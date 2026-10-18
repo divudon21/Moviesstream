@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget_light"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="👟 Steps Today"
+        android:textColor="#FF2D3436"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/tv_steps_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="7,842"
+        android:textColor="#FF6C5CE7"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/progress_steps"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginTop="8dp"
+        android:max="10000"
+        android:progress="7842" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Goal: 10,000 • 78% completed"
+        android:textColor="#80636E72"
+        android:textSize="10sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_battery_level"
+        android:padding="4dp"
+        android:text="🔥 342 kcal burned"
+        android:textColor="#FFFFFFFF"
+        android:textSize="9sp" />
+</LinearLayout>
