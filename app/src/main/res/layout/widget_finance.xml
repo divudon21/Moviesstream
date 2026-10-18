@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget_rounded"
+    android:orientation="vertical"
+    android:padding="14dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💰" android:textSize="14sp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="6dp" android:text="Finance" android:textColor="#80FFFFFF" android:textSize="10sp" android:textStyle="bold"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:background="@drawable/bg_battery_level" android:padding="4dp" android:text="₹ +12.4%" android:textColor="#FFFFFFFF" android:textSize="9sp"/>
+    </LinearLayout>
+    <TextView android:id="@+id/tv_finance_amount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="₹ 48,290" android:textColor="#FFFFFFFF" android:textSize="24sp" android:textStyle="bold"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Saved • Goal ₹60k" android:textColor="#CCFFFFFF" android:textSize="10sp"/>
+    <ProgressBar android:layout_width="match_parent" android:layout_height="5dp" android:layout_marginTop="8dp" style="?android:attr/progressBarStyleHorizontal" android:max="100" android:progress="78" android:progressDrawable="@drawable/bg_battery_level"/>
+</LinearLayout>

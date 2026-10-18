@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget_rounded"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="14dp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔥 Habit Streak" android:textColor="#FFFFFFFF" android:textSize="11sp" android:textStyle="bold"/>
+    <TextView android:id="@+id/tv_habit_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="12" android:textColor="#FFFDCB6E" android:textSize="36sp" android:textStyle="bold"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="days streak" android:textColor="#CCFFFFFF" android:textSize="11sp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:gravity="center" android:orientation="horizontal">
+        <TextView android:text="Mon" android:textColor="#80FFFFFF" android:textSize="8sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="4dp" android:background="@drawable/bg_battery_level"/>
+        <TextView android:text="Tue" android:textColor="#80FFFFFF" android:textSize="8sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:padding="4dp" android:background="@drawable/bg_battery_level"/>
+        <TextView android:text="Wed" android:textColor="#FFFFFFFF" android:textSize="8sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:padding="4dp" android:background="@drawable/bg_widget_cell"/>
+        <TextView android:text="Thu" android:textColor="#FFFFFFFF" android:textSize="8sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:padding="4dp" android:background="@drawable/bg_widget_cell"/>
+    </LinearLayout>
+</LinearLayout>

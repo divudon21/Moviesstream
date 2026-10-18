@@ -28,3 +28,8 @@ app/release.keystore
 
 # Logs
 *.log
+
+# Skill local install (UI/UX Pro Max) - not needed in repo
+.claude/
+.github/skills/
+design-system/.tmp/

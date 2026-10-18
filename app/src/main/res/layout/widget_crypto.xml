@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget_rounded"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="14dp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="₿ Crypto Ticker" android:textColor="#FFFDCB6E" android:textSize="11sp" android:textStyle="bold"/>
+    <TextView android:id="@+id/tv_crypto_btc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="BTC ₹58,24,000" android:textColor="#FFFFFFFF" android:textSize="16sp" android:textStyle="bold"/>
+    <TextView android:id="@+id/tv_crypto_change" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_battery_level" android:padding="4dp" android:text="▲ +2.4% Today" android:textColor="#FFFFFFFF" android:textSize="9sp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="ETH ₹2,18,400 • +1.2%" android:textColor="#80FFFFFF" android:textSize="9sp"/>
+</LinearLayout>

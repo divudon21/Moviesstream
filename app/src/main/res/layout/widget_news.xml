@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget_rounded"
+    android:orientation="vertical"
+    android:padding="14dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📰 News" android:textColor="#FFFFFFFF" android:textSize="11sp" android:textStyle="bold"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:background="@drawable/bg_battery_level" android:padding="4dp" android:text="LIVE" android:textColor="#FFFFFFFF" android:textSize="8sp"/>
+    </LinearLayout>
+    <TextView android:id="@+id/tv_news_1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="• India wins test match vs England" android:textColor="#FFFFFFFF" android:textSize="11sp" android:maxLines="1" android:ellipsize="end"/>
+    <TextView android:id="@+id/tv_news_2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="• ISRO launch successful" android:textColor="#CCFFFFFF" android:textSize="10sp" android:maxLines="1"/>
+    <TextView android:id="@+id/tv_news_3" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="• Market hits new high" android:textColor="#80FFFFFF" android:textSize="10sp" android:maxLines="1"/>
+</LinearLayout>

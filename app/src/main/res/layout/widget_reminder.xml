@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget_light"
+    android:orientation="vertical"
+    android:padding="14dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⏰ Reminders" android:textColor="#FF2D3436" android:textSize="11sp" android:textStyle="bold"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:background="@drawable/bg_battery_level" android:padding="4dp" android:text="3 Today" android:textColor="#FFFFFFFF" android:textSize="8sp"/>
+    </LinearLayout>
+    <TextView android:id="@+id/tv_reminder_1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="• 09:00 AM Team standup" android:textColor="#FF2D3436" android:textSize="11sp"/>
+    <TextView android:id="@+id/tv_reminder_2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="• 02:30 PM Client call" android:textColor="#FF636E72" android:textSize="10sp"/>
+    <TextView android:id="@+id/tv_reminder_3" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="• 07:00 PM Gym" android:textColor="#FF636E72" android:textSize="10sp"/>
+</LinearLayout>
