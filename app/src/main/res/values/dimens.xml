@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="corner_radius">20dp</dimen>
+    <dimen name="widget_min_width">110dp</dimen>
+    <dimen name="widget_min_height">110dp</dimen>
+    <dimen name="widget_preview_corner">16dp</dimen>
+</resources>

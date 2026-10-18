@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="widgetfy_primary">#FF6C5CE7</color>
+    <color name="widgetfy_secondary">#FF00CEC9</color>
+    <color name="widgetfy_accent">#FFFDCB6E</color>
+    <color name="widgetfy_background">#FFF8F9FF</color>
+    <color name="widgetfy_surface">#FFFFFFFF</color>
+    <color name="widgetfy_error">#FFD63031</color>
+    <color name="widgetfy_text_primary">#FF2D3436</color>
+    <color name="widgetfy_text_secondary">#FF636E72</color>
+
+    <color name="widget_bg">#CC2D3436</color>
+    <color name="widget_bg_light">#CCFFFFFF</color>
+    <color name="clock_accent">#FF6C5CE7</color>
+    <color name="battery_green">#FF00B894</color>
+    <color name="battery_orange">#FFFDCB6E</color>
+    <color name="battery_red">#FFD63031</color>
+</resources>

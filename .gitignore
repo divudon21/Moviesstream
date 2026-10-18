@@ -1,0 +1,30 @@
+# Android
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/app/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+*.keystore
+*.jks
+
+# Python / Node leftover (previously)
+node_modules/
+
+# Progress file - local only as requested
+progress.md
+
+# Keystore
+app/release.keystore
+
+# APK outputs (will be in releases)
+*.apk
+!app/release.keystore
+
+# Logs
+*.log
