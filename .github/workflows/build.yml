@@ -2,7 +2,7 @@ name: Build Widgetfy APKs
 
 on:
   push:
-    branches: [ main, arena/9086af92-moviesstream ]
+    branches: [ main, "arena/*" ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -89,25 +89,28 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.0-${{ github.run_number }}
-          name: "Widgetfy v1.0.0 - Build ${{ github.run_number }}"
+          tag_name: v2.0.0-${{ github.run_number }}
+          name: "Widgetfy v2.0.0 Bento — Build ${{ github.run_number }}"
           body: |
-            ## Widgetfy v1.0.0 — Real Working Widgets
+            ## Widgetfy v2.0.0 — Premium Bento Edition ✨
 
-            📦 **Package:** `com.widgetfy.com`
-            📱 **12 Premium Widgets** — Clock, Battery, Weather, Calendar, Todo, Photo, Search, Quote, World Clock, Steps etc.
+            📦 **Package:** `com.widgetfy.com` | **20 Real Widgets** | **Material 3 Expressive + Bento Box Grid**
+            🎨 **Design:** ui-ux-pro-max skill v2.15.0 — Violet #6750A4 + Teal + Rose palette
 
-            ### Downloads
-            - **widgetfy-universal.apk** → All devices (recommended)
-            - **widgetfy-arm64-v8a.apk** → Modern 64-bit phones
-            - **widgetfy-armeabi-v7a.apk** → Older 32-bit phones
+            **20 Widgets:** Digital/Analog/Flip/World Clock • Battery Pro • Weather Glass • Search • Steps • Calendar Bento • Tasks • Photo • Daily Zen • ★ Music Player • Countdown • Finance Pulse • Health Ring • News • Crypto Ticker • Habit Streak • Reminder
+
+            ### Downloads (3 APK splits)
+            - **universal.apk** → All devices (recommended)
+            - **arm64-v8a.apk** → Modern 64-bit phones
+            - **armeabi-v7a.apk** → Older 32-bit phones
+            - plus `widgetfy-*` and `app-*` aliases (9 files total)
 
             ### How to install
-            1. Download universal APK
+            1. Download universal.apk
             2. Enable Install from Unknown Sources
-            3. Install & long-press home → Widgets → Widgetfy
+            3. Install & long-press home → Widgets → Widgetfy → Drag any of 20 widgets
 
-            _Built via GitHub Actions with ABI splits — triggered on push to ${{ github.ref_name }}_
+            _Built via GitHub Actions with ABI splits — triggered on push to ${{ github.ref_name }} — v2 Bento Edition_
           files: release-apks/*.apk
           draft: false
           prerelease: false
